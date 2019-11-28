@@ -1,9 +1,7 @@
 package com.example.myapplication;
 
 import android.content.Intent;
-
 import androidx.appcompat.app.AppCompatActivity;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Looper;
@@ -14,8 +12,6 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
-import androidx.appcompat.app.AppCompatActivity;
-
 import com.example.myapplication.model.http.ApiHelper;
 import java.io.IOException;
 import okhttp3.Call;
@@ -62,14 +58,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         switch(v.getId()){
             //登录按钮
             case R.id.btn_login:
-                intent.setData(Uri.parse("http://47.97.187.33:8080"));
-                intent.setAction(Intent.ACTION_VIEW);
-                startActivity(intent);
-                break;
-            case R.id.btn_enter:
-                Toast.makeText(MainActivity.this,"直接进入",Toast.LENGTH_SHORT).show();
-                intent = new Intent(MainActivity.this,SecondActivity.class);
-                startActivity(intent);
                 String username = editText1.getText().toString();
                 String password = editText2.getText().toString();
 
@@ -118,9 +106,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         }
                     });
                 }
+                break;
+            //直接进入按钮
+            case R.id.btn_enter:
+                Toast.makeText(MainActivity.this,"直接进入",Toast.LENGTH_SHORT).show();
+                intent = new Intent(MainActivity.this,SecondActivity.class);
+                startActivity(intent);
 
                 break;
-                //直接进入按钮
 
             default:
                 break;

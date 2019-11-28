@@ -8,7 +8,6 @@ import okhttp3.RequestBody;
 
 public class ApiHelper {
 
-    String Str;
 
     //判断登录状态
     public static int flagJSONWithGSON(String jsonData){
