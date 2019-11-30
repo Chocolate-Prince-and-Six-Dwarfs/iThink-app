@@ -6,6 +6,8 @@
     android:orientation="vertical">
     <!--标题栏-->
 
+    <include layout="@layout/user_title"/>
+
     <ListView
         android:id="@+id/list_view"
         android:layout_width="wrap_content"

@@ -1,5 +1,6 @@
 package com.example.myapplication;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.SharedPreferences;
@@ -30,6 +31,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        ActivityCollector.addActivity(this);
 
         Button btn_login = (Button)findViewById(R.id.btn_login);
         Button btn_enter = (Button)findViewById(R.id.btn_enter);
@@ -66,6 +69,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     Toast.makeText(MainActivity.this,"账号密码不能为空！",Toast.LENGTH_SHORT).show();
 
                 }else{
+
+                    ProgressDialog progressDialog = new ProgressDialog(MainActivity.this);
+                    progressDialog.setMessage("Login...");
+                    progressDialog.setCancelable(false);
+                    progressDialog.show();
+
                     RequestBody requestBody = new FormBody.Builder()
                             .add("email", username)
                             .add("pwd",password)
@@ -90,10 +99,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                     editor.commit();
                                 }
 
+                                progressDialog.dismiss();
+
                                 Intent intent = new Intent(MainActivity.this,SecondActivity.class);
                                 intent.putExtra("username",username);
                                 startActivity(intent);
                             }else{
+
+                                progressDialog.dismiss();
                                 Looper.prepare();
                                 Toast.makeText(getBaseContext(), "账号或密码错误", Toast.LENGTH_LONG).show();
                                 Looper.loop();
@@ -109,8 +122,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
             //直接进入按钮
             case R.id.btn_enter:
-                Toast.makeText(MainActivity.this,"直接进入",Toast.LENGTH_SHORT).show();
+
+                //Toast.makeText(MainActivity.this,"直接进入",Toast.LENGTH_SHORT).show();
                 intent = new Intent(MainActivity.this,SecondActivity.class);
+                intent.putExtra("username","");
                 startActivity(intent);
 
                 break;

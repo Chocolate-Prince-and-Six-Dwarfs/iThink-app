@@ -11,7 +11,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
-
+import com.example.myapplication.ActivityCollector;
 import com.example.myapplication.R;
 
 import java.util.concurrent.CopyOnWriteArraySet;
@@ -26,6 +26,7 @@ public class TitleActivity extends AppCompatActivity implements View.OnClickList
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setUpView();
+        ActivityCollector.addActivity(this);
     }
 
     private void setUpView(){

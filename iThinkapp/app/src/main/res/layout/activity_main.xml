@@ -8,7 +8,7 @@
     android:orientation="vertical">
     <!--标题栏-->
 
-    <include layout="@layout/layout_title"/>
+    <!--<include layout="@layout/layout_title"/>-->
 
     <!--显示头像，记得加入id iv_head -->
     <ImageView
@@ -96,7 +96,16 @@
         android:textSize="18sp"/>
     <!--显示tv register , find_psw -->
 
-
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_marginTop="72dp"
+        android:layout_marginLeft="35dp"
+        android:layout_marginRight="35dp"
+        android:layout_gravity="center_horizontal"
+        android:text="欢迎来到iThink，赶快登录吧~"
+        android:textSize="25sp"
+        android:fontFamily="@font/huawenxingkai"/>
 
 
 </LinearLayout>

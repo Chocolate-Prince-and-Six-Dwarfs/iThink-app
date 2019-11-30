@@ -5,4 +5,6 @@
     <color name="colorAccent">#D81B60</color>
 
     <color name="titleColor">#ed4255</color>
+
+    <color name="userColor">#1C86EE</color>
 </resources>
