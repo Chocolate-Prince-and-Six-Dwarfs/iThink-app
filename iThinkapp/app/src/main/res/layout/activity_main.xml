@@ -8,6 +8,8 @@
     android:orientation="vertical">
     <!--标题栏-->
 
+    <include layout="@layout/layout_title"/>
+
     <!--显示头像，记得加入id iv_head -->
     <ImageView
         android:id="@+id/iv_head"
