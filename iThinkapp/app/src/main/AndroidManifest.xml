@@ -13,8 +13,8 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
         <activity android:name=".TitleActivity"></activity>
-        <activity android:name=".ThridActivity" />
-        <activity android:name=".SecondActivity">
+        <activity android:name=".CreateIdeaActivity" />
+        <activity android:name=".IdeasActivity">
             <intent-filter>
                 <action android:name="android.intent.action.SECOND" />
 

@@ -101,7 +101,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                                 progressDialog.dismiss();
 
-                                Intent intent = new Intent(MainActivity.this,SecondActivity.class);
+                                Intent intent = new Intent(MainActivity.this, IdeasActivity.class);
                                 intent.putExtra("username",username);
                                 startActivity(intent);
                             }else{
@@ -124,7 +124,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.btn_enter:
 
                 //Toast.makeText(MainActivity.this,"直接进入",Toast.LENGTH_SHORT).show();
-                intent = new Intent(MainActivity.this,SecondActivity.class);
+                intent = new Intent(MainActivity.this, IdeasActivity.class);
                 intent.putExtra("username","");
                 startActivity(intent);
 
