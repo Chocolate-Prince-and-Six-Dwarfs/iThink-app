@@ -11,7 +11,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".model.TitleActivity"></activity>
+        <activity android:name=".TitleActivity"></activity>
         <activity android:name=".ThridActivity" />
         <activity android:name=".SecondActivity">
             <intent-filter>
