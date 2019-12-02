@@ -1,4 +1,4 @@
-package com.example.myapplication;
+﻿package com.example.myapplication;
 
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
@@ -10,6 +10,7 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.PopupMenu;
+
 <<<<<<< HEAD:iThinkapp/app/src/main/java/com/example/myapplication/IdeasActivity.java
 <<<<<<< HEAD:iThinkapp/app/src/main/java/com/example/myapplication/SecondActivity.java
 import android.widget.Toolbar;
