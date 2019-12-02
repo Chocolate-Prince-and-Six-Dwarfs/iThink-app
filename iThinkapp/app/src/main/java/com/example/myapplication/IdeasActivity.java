@@ -69,9 +69,10 @@ public class IdeasActivity extends AppCompatActivity implements View.OnClickList
                         Intent intent1 = new Intent(IdeasActivity.this,IdeadetailActivity.class);
                         intent1.putExtra("title",idea.getTitle());
                         intent1.putExtra("content",idea.getContent());
+                        intent1.putExtra("date",idea.getDate());
                         intent1.putExtra("ideaId",idea.getIdeaId());
                         startActivity(intent1);
-                  
+
             }
         });
     }
@@ -118,6 +119,7 @@ public class IdeasActivity extends AppCompatActivity implements View.OnClickList
                         idea1.setIdeaId(1);
                         idea1.setTitle("第一个");
                         idea1.setContent("内容呀呀呀呀呀呀呀呀!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+                        idea1.setDate("123");
                         idea1.setIs_upload(false);
                         idea1.save();
                         break;
