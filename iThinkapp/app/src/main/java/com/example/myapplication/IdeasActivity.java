@@ -18,6 +18,8 @@ import com.example.myapplication.model.pojo.Idea;
 import org.litepal.LitePal;
 import org.litepal.crud.DataSupport;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.List;
 
 public class IdeasActivity extends AppCompatActivity implements View.OnClickListener{
@@ -62,21 +64,14 @@ public class IdeasActivity extends AppCompatActivity implements View.OnClickList
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                switch (i){
-                    case 0:
+                        Idea idea = ideaList.get(i);
                         Toast.makeText(IdeasActivity.this,"第"+i+"个item",Toast.LENGTH_SHORT).show();
-                        Intent intent1 = new Intent(IdeasActivity.this,CreateIdeaActivity.class);
+                        Intent intent1 = new Intent(IdeasActivity.this,IdeadetailActivity.class);
+                        intent1.putExtra("title",idea.getTitle());
+                        intent1.putExtra("content",idea.getContent());
+                        intent1.putExtra("ideaId",idea.getIdeaId());
                         startActivity(intent1);
-                        break;
-                    case 1:
-                        Toast.makeText(IdeasActivity.this,"第"+i+"个item",Toast.LENGTH_SHORT).show();
-                        break;
-                    case 2:
-                        Toast.makeText(IdeasActivity.this,"第"+i+"个item",Toast.LENGTH_SHORT).show();
-                        break;
-                    default:
-                        break;
-                }
+                  
             }
         });
     }
