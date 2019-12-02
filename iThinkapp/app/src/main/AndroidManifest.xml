@@ -12,16 +12,18 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".model.TitleActivity"></activity>
-        <activity android:name=".ThridActivity" />
-        <activity android:name=".SecondActivity">
+        <activity android:name=".IdeadetailActivity"></activity>
+        <activity android:name=".TitleActivity" />
+        <activity android:name=".CreateIdeaActivity" />
+        <activity android:name=".IdeasActivity">
             <intent-filter>
                 <action android:name="android.intent.action.SECOND" />
 
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity"
+        <activity
+            android:name=".MainActivity"
             android:launchMode="singleTask">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -34,9 +36,9 @@
             android:name="org.apache.http.legacy"
             android:required="false" />
     </application>
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
-
     <uses-permission android:name="android.permission.INTERNET" />
+
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
 </manifest>

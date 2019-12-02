@@ -1,4 +1,4 @@
-package com.example.myapplication.model;
+package com.example.myapplication;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -29,6 +29,7 @@ public class TitleActivity extends AppCompatActivity implements View.OnClickList
         ActivityCollector.addActivity(this);
     }
 
+    //初始化控件
     private void setUpView(){
         setContentView(R.layout.title_activity);
         titleText = (TextView)findViewById(R.id.idea_title);
@@ -36,7 +37,7 @@ public class TitleActivity extends AppCompatActivity implements View.OnClickList
         backwardbButton.setOnClickListener(this);
     }
 
-    private void hideBackwardView(boolean hide){
+    protected void hideBackwardView(boolean hide){
         if(backwardbButton != null){
             if(hide) {
                 backwardbButton.setVisibility(View.INVISIBLE);

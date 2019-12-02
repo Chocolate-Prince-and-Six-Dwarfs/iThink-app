@@ -30,7 +30,7 @@ public class IdeaAdapter extends ArrayAdapter<Idea> {
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         Idea idea = getItem(position);
-        View view = LayoutInflater.from(getContext()).inflate(resourceId,parent,false);
+        View view = LayoutInflater.from(getContext()).inflate(resourceId, parent,false);
         TextView idea_title = (TextView) view.findViewById(R.id.idea_title);
         TextView idea_content = (TextView) view.findViewById(R.id.idea_content);
         idea_title.setText(idea.getTitle());
