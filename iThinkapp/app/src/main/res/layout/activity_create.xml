@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--新建胶囊界面-->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <!--标题栏-->
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:text="创建新胶囊"
+        android:textSize="30dp"
+        android:gravity="center"
+        android:background="@color/userColor"
+        />
+
+    <EditText
+        android:id="@+id/create_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="30dp"
+        android:hint="输入标题"
+        android:singleLine="true"/>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <EditText
+            android:id="@+id/create_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textSize="18dp"
+            android:hint="输入创意内容"
+            android:maxLines="7"
+            android:inputType="textLongMessage"
+            android:gravity="top"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"/>
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="25dp"
+            android:text="创建胶囊"
+            android:layout_alignParentBottom="true"/>
+    </RelativeLayout>
+</LinearLayout>
