@@ -1,4 +1,4 @@
-﻿package com.example.myapplication;
+package com.example.myapplication;
 
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
@@ -11,27 +11,19 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.PopupMenu;
 
-<<<<<<< HEAD:iThinkapp/app/src/main/java/com/example/myapplication/IdeasActivity.java
-<<<<<<< HEAD:iThinkapp/app/src/main/java/com/example/myapplication/SecondActivity.java
+
 import android.widget.Toolbar;
-=======
-=======
->>>>>>> bb21a70f4c5a2071a1e0546a13fa88f4a2eeef46:iThinkapp/app/src/main/java/com/example/myapplication/IdeasActivity.java
+
 import android.widget.Toast;
 
->>>>>>> bb21a70f4c5a2071a1e0546a13fa88f4a2eeef46:iThinkapp/app/src/main/java/com/example/myapplication/IdeasActivity.java
 import com.example.myapplication.model.Adapter.IdeaAdapter;
 import com.example.myapplication.model.pojo.Idea;
 import org.litepal.LitePal;
 import org.litepal.crud.DataSupport;
-<<<<<<< HEAD:iThinkapp/app/src/main/java/com/example/myapplication/SecondActivity.java
-=======
+
 
 import java.lang.reflect.Array;
-<<<<<<< HEAD:iThinkapp/app/src/main/java/com/example/myapplication/IdeasActivity.java
->>>>>>> bb21a70f4c5a2071a1e0546a13fa88f4a2eeef46:iThinkapp/app/src/main/java/com/example/myapplication/IdeasActivity.java
-=======
->>>>>>> bb21a70f4c5a2071a1e0546a13fa88f4a2eeef46:iThinkapp/app/src/main/java/com/example/myapplication/IdeasActivity.java
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -130,6 +122,7 @@ public class IdeasActivity extends AppCompatActivity implements View.OnClickList
                     case R.id.test1:
                         Idea idea1 = new Idea();
                         idea1.setIdeaId(1);
+                        idea1.setOwnerId(1);
                         idea1.setTitle("第一个");
                         idea1.setContent("内容呀呀呀呀呀呀呀呀!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
                         idea1.setDate("123");
@@ -137,7 +130,7 @@ public class IdeasActivity extends AppCompatActivity implements View.OnClickList
                         idea1.save();
                         break;
                     case R.id.test2:
-                        DataSupport.deleteAll(Idea.class,"id = ?","1");
+                        DataSupport.deleteAll(Idea.class,"ideaId = ?","1");
                     default:
                         break;
                 }

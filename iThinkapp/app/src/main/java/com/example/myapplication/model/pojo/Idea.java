@@ -50,4 +50,12 @@ public class Idea extends DataSupport {
     public void setDate(String date) {
         this.date = date;
     }
+
+    public int getOwnerId() {
+        return ownerId;
+    }
+
+    public void setOwnerId(int ownerId) {
+        this.ownerId = ownerId;
+    }
 }
