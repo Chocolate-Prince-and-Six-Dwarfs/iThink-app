@@ -29,4 +29,16 @@ public class ApiHelper {
 
     }
 
+    //cookie
+    public static void sendcookieRequest(String address, String cookie,okhttp3.Callback callback) {
+
+        OkHttpClient client = new OkHttpClient();
+        Request request = new Request.Builder()
+                .url(address)
+                .addHeader("cookie",cookie)
+                .build();
+        //将要发送的数据用RequestBody对象保存，然后传入到该参数即可
+        client.newCall(request).enqueue(callback);
+
+    }
 }

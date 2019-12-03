@@ -17,6 +17,7 @@ import com.example.myapplication.model.http.ApiHelper;
 import java.io.IOException;
 import okhttp3.Call;
 import okhttp3.FormBody;
+import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
@@ -49,6 +50,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         String password=sharedPreferences.getString("password","");
         boolean checkbox=sharedPreferences.getBoolean("checkbox",false);
 
+        String userId = sharedPreferences.getString("userId","");
+        if(!userId.isEmpty()){
+            Intent intent = new Intent(MainActivity.this, IdeasActivity.class);
+            intent.putExtra("user_id",userId);
+            intent.putExtra("user_email",username);
+            startActivity(intent);
+        }
+
         editText1.setText(username);
         editText2.setText(password);
         checkBox.setChecked(checkbox);
@@ -57,74 +66,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onClick(View v) {
-        Intent intent = new Intent();
         switch(v.getId()){
             //登录按钮
             case R.id.btn_login:
-                String username = editText1.getText().toString();
-                String password = editText2.getText().toString();
 
+                HttpRequest();
 
-                if(TextUtils.isEmpty(username) ||TextUtils.isEmpty(password)){               //检验账号密码是否为空
-                    Toast.makeText(MainActivity.this,"账号密码不能为空！",Toast.LENGTH_SHORT).show();
-
-                }else{
-
-                    ProgressDialog progressDialog = new ProgressDialog(MainActivity.this);
-                    progressDialog.setMessage("Login...");
-                    progressDialog.setCancelable(false);
-                    progressDialog.show();
-
-                    RequestBody requestBody = new FormBody.Builder()
-                            .add("email", username)
-                            .add("pwd",password)
-                            .build();
-                    ApiHelper.sendHttpRequest("http://47.97.187.33:8080/user/login", requestBody ,new okhttp3.Callback(){
-                        @Override
-                        public void onResponse(Call call, Response response) throws IOException {
-
-                            String responseData = response.body().string();
-                            //解析返回结果，进行判断是否是正确账号密码
-                            if(1 == ApiHelper.flagJSONWithGSON(responseData)){
-                                //检查是否需要记住密码
-                                if(checkBox.isChecked()){
-                                    SharedPreferences sharedPreferences = getSharedPreferences("config",0);
-                                    SharedPreferences.Editor editor=sharedPreferences.edit();
-                                    //把数据进行保存
-                                    editor.putString("name",username);
-                                    editor.putString("password",password);
-                                    //记住勾选的状态
-                                    editor.putBoolean("checkbox",checkBox.isChecked());
-                                    //提交数据
-                                    editor.commit();
-                                }
-
-                                progressDialog.dismiss();
-
-                                Intent intent = new Intent(MainActivity.this, IdeasActivity.class);
-                                intent.putExtra("username",username);
-                                startActivity(intent);
-                            }else{
-
-                                progressDialog.dismiss();
-                                Looper.prepare();
-                                Toast.makeText(getBaseContext(), "账号或密码错误", Toast.LENGTH_LONG).show();
-                                Looper.loop();
-                            }
-
-                        }
-                        @Override
-                        public void onFailure(Call call, IOException e) {
-                            Log.d("MainActivity","发送请求失败");
-                        }
-                    });
-                }
                 break;
             //直接进入按钮
             case R.id.btn_enter:
 
                 //Toast.makeText(MainActivity.this,"直接进入",Toast.LENGTH_SHORT).show();
-                intent = new Intent(MainActivity.this, IdeasActivity.class);
+                Intent intent = new Intent(MainActivity.this, IdeasActivity.class);
                 intent.putExtra("username","");
                 startActivity(intent);
 
@@ -134,6 +87,92 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
         }
 
+    }
+
+    public void HttpRequest(){
+        String username = editText1.getText().toString();
+        String password = editText2.getText().toString();
+
+        if(TextUtils.isEmpty(username) ||TextUtils.isEmpty(password)){               //检验账号密码是否为空
+            Toast.makeText(MainActivity.this,"账号密码不能为空！",Toast.LENGTH_SHORT).show();
+
+        }else{
+
+            ProgressDialog progressDialog = new ProgressDialog(MainActivity.this);
+            progressDialog.setMessage("Login...");
+            progressDialog.setCancelable(false);
+            progressDialog.show();
+
+            RequestBody requestBody = new FormBody.Builder()
+                    .add("email", username)
+                    .add("pwd",password)
+                    .build();
+            ApiHelper.sendHttpRequest("http://47.97.187.33:8080/user/login", requestBody ,new okhttp3.Callback(){
+                @Override
+                public void onResponse(Call call, Response response) throws IOException {
+
+                    String responseData = response.body().string();
+                    //解析返回结果，进行判断是否是正确账号密码
+                    if(1 == ApiHelper.flagJSONWithGSON(responseData)){
+                        //检查是否需要记住密码
+                        if(checkBox.isChecked()){
+                            SharedPreferences sharedPreferences = getSharedPreferences("config",0);
+                            SharedPreferences.Editor editor=sharedPreferences.edit();
+                            //把数据进行保存
+                            editor.putString("name",username);
+                            editor.putString("password",password);
+                            //记住勾选的状态
+                            editor.putBoolean("checkbox",checkBox.isChecked());
+                            //提交数据
+                            editor.commit();
+
+                            String cookie = response.header("Set-Cookie");
+
+                            ApiHelper.sendcookieRequest("http://47.97.187.33:8080/user/getLoginId",cookie,new okhttp3.Callback(){
+                                @Override
+                                public void onFailure(Call call, IOException e) {
+                                }
+
+                                @Override
+                                public void onResponse(Call call, Response response) throws IOException {
+                                    String userId = response.body().string();
+
+                                    //保存用户cookie
+                                    SharedPreferences sharedPreferences = getSharedPreferences("config",0);
+                                    SharedPreferences.Editor editor=sharedPreferences.edit();
+                                    //把数据进行保存
+                                    editor.putString("userId",userId);
+
+                                    //提交数据
+                                    editor.commit();
+
+                                    progressDialog.dismiss();
+
+                                    Intent intent = new Intent(MainActivity.this, IdeasActivity.class);
+                                    intent.putExtra("user_id",userId);
+                                    intent.putExtra("user_email",username);
+                                    startActivity(intent);
+                                }
+                            });
+
+                        }
+
+
+                    }else{
+
+                        progressDialog.dismiss();
+                        Looper.prepare();
+                        Toast.makeText(getBaseContext(), "账号或密码错误", Toast.LENGTH_LONG).show();
+                        Looper.loop();
+                    }
+
+                }
+                @Override
+                public void onFailure(Call call, IOException e) {
+                    Log.d("MainActivity","发送请求失败");
+                }
+            });
+        }
     }
 
 

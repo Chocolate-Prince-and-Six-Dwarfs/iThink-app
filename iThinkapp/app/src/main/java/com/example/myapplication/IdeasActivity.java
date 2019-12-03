@@ -2,6 +2,7 @@ package com.example.myapplication;
 
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
@@ -54,14 +55,14 @@ public class IdeasActivity extends AppCompatActivity implements View.OnClickList
 
         //接受传过来的用户名
         Intent intent = getIntent();
-        String data = intent.getStringExtra("username");
-        Log.d("IdeasActivity",data);
+        String user_id = intent.getStringExtra("user_id");
+        String user_email = intent.getStringExtra("user_email");
 
         //判断是否登陆过，若登录了，按钮失效
-        if(data.isEmpty()){
+        if(user_id.isEmpty()){
             back_login.setText("登录");
         }else{
-            back_login.setText(data);
+            back_login.setText(user_email);
             back_login.setEnabled(false);
         }
 
@@ -113,6 +114,9 @@ public class IdeasActivity extends AppCompatActivity implements View.OnClickList
             public boolean onMenuItemClick(MenuItem item) {
                 switch (item.getItemId()){
                     case R.id.login_out:
+                        SharedPreferences.Editor editor = getSharedPreferences("config",0).edit();
+                        editor.remove("userId");
+                        editor.commit();
                         Intent intent = new Intent(IdeasActivity.this,MainActivity.class);
                         startActivity(intent);
                         break;
