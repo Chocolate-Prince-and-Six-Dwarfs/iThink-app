@@ -1,7 +1,12 @@
 package com.example.myapplication.model.http;
 
 import com.example.myapplication.model.pojo.LoginFlag;
+import com.example.myapplication.model.pojo.User;
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import java.util.List;
+
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
@@ -14,6 +19,13 @@ public class ApiHelper {
         Gson gson = new Gson();
         LoginFlag loginFlag = gson.fromJson(jsonData,LoginFlag.class);
         return loginFlag.getStatus();
+    }
+
+    //获得用户信息
+    public static User userJSONWithGSON(String jsonData){
+        Gson gson = new Gson();
+        User user = gson.fromJson(jsonData,User.class);
+        return user;
     }
 
     //发送登陆请求

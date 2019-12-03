@@ -2,14 +2,17 @@ package com.example.myapplication.model.pojo;
 
 import org.litepal.crud.DataSupport;
 
+import java.util.Date;
+
 public class Idea extends DataSupport {
     //胶囊ID、拥有者ID、胶囊名称（标题）、胶囊内容、胶囊生成时间
     private int ideaId;
     private int ownerId;
     private String title;
     private String content;
-    private String date;
+    private Date date;
     private boolean is_upload;
+    private String ownerName;
 
     public int getIdeaId() {
         return ideaId;
@@ -43,11 +46,11 @@ public class Idea extends DataSupport {
         this.is_upload = is_upload;
     }
 
-    public String getDate() {
+    public Date getDate() {
         return date;
     }
 
-    public void setDate(String date) {
+    public void setDate(Date date) {
         this.date = date;
     }
 
@@ -57,5 +60,13 @@ public class Idea extends DataSupport {
 
     public void setOwnerId(int ownerId) {
         this.ownerId = ownerId;
+    }
+
+    public String getOwnerName() {
+        return ownerName;
+    }
+
+    public void setOwnerName(String ownerName) {
+        this.ownerName = ownerName;
     }
 }

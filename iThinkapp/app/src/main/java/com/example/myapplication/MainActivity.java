@@ -54,8 +54,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if(!userId.isEmpty()){
             Intent intent = new Intent(MainActivity.this, IdeasActivity.class);
             intent.putExtra("user_id",userId);
-            intent.putExtra("user_email",username);
             startActivity(intent);
+            MainActivity.this.finish();
         }
 
         editText1.setText(username);
@@ -78,9 +78,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                 //Toast.makeText(MainActivity.this,"直接进入",Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(MainActivity.this, IdeasActivity.class);
-                intent.putExtra("username","");
+                intent.putExtra("user_id","");
                 startActivity(intent);
-
+                MainActivity.this.finish();
                 break;
 
             default:
@@ -150,8 +150,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                                     Intent intent = new Intent(MainActivity.this, IdeasActivity.class);
                                     intent.putExtra("user_id",userId);
-                                    intent.putExtra("user_email",username);
                                     startActivity(intent);
+                                    MainActivity.this.finish();
                                 }
                             });
 
