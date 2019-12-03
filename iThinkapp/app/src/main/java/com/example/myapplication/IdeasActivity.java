@@ -135,6 +135,11 @@ public class IdeasActivity extends AppCompatActivity implements View.OnClickList
                         break;
                     case R.id.test2:
                         DataSupport.deleteAll(Idea.class,"ideaId = ?","1");
+                        break;
+                    case R.id.create_idea:
+                        Intent intent1 = new Intent(IdeasActivity.this, CreateIdeaActivity.class);
+                        startActivity(intent1);
+                        break;
                     default:
                         break;
                 }

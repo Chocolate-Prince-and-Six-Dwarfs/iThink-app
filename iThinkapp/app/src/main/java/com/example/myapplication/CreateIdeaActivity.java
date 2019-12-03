@@ -9,7 +9,7 @@ public class CreateIdeaActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_thrid);
+        setContentView(R.layout.activity_create);
         ActivityCollector.addActivity(this);
     }
 }
