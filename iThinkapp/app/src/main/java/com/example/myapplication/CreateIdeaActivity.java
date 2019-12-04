@@ -115,10 +115,4 @@ public class CreateIdeaActivity extends AppCompatActivity implements View.OnClic
             }
         });
     }
-
-    public void initUser()
-    {
-        user.setId(0);
-        user.setName("游客");
-    }
 }
