@@ -5,38 +5,22 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.PopupMenu;
-
-
-import android.widget.Toolbar;
-
-import android.widget.Toast;
-
 import com.example.myapplication.model.Adapter.IdeaAdapter;
 import com.example.myapplication.model.http.ApiHelper;
 import com.example.myapplication.model.pojo.Idea;
 import com.example.myapplication.model.pojo.User;
-
 import org.litepal.LitePal;
 import org.litepal.crud.DataSupport;
-
 import java.io.IOException;
-import java.lang.reflect.Array;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-
 import okhttp3.Call;
 import okhttp3.FormBody;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
@@ -79,6 +63,7 @@ public class IdeasActivity extends AppCompatActivity implements View.OnClickList
         //判断是否登陆过，若登录了，按钮失效
         if(user_id.isEmpty()){
             back_login.setText("登录");
+            user = new User();
         }else{
             getUserInfo(user_id);
             while(false == flag){}
@@ -91,17 +76,10 @@ public class IdeasActivity extends AppCompatActivity implements View.OnClickList
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                         Idea idea = ideaList.get(i);
-                        Toast.makeText(IdeasActivity.this,"第"+i+"个item",Toast.LENGTH_SHORT).show();
                         Intent intent1 = new Intent(IdeasActivity.this,IdeadetailActivity.class);
-                        intent1.putExtra("title",idea.getTitle());
-                        intent1.putExtra("content",idea.getContent());
-                        intent1.putExtra("idea_id",String.valueOf(idea.getIdeaId()));
-                        intent1.putExtra("user_id",String.valueOf(user.getId()));
-                        Log.d("测试删除：",String.valueOf(idea.getIdeaId()));
-                        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-                        intent1.putExtra("date",sdf.format(idea.getDate()));
 
-                        intent1.putExtra("user_name",user.getName());
+                        intent1.putExtra("idea",idea);
+                        intent1.putExtra("user",user);
                         startActivity(intent1);
             }
         });

@@ -11,9 +11,12 @@
         android:layout_height="60dp"
         android:text="创建新胶囊"
         android:textSize="30dp"
+        android:textColor="@android:color/white"
         android:gravity="center"
         android:background="@color/userColor"
         />
+
+
 
     <EditText
         android:id="@+id/create_title"

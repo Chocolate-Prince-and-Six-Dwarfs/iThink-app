@@ -4,6 +4,9 @@
         android:id="@+id/upload_idea"
         android:title="上传胶囊"/>
     <item
+        android:id="@+id/save_idea"
+        android:title="保存修改"/>
+    <item
         android:id="@+id/delete_idea"
         android:title="删除"/>
 </menu>

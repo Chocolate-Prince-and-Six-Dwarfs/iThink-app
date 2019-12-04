@@ -1,6 +1,8 @@
 package com.example.myapplication.model.pojo;
 
-public class User {
+import java.io.Serializable;
+
+public class User implements Serializable {
     private String birthday;
     private String head;
     private Integer id;

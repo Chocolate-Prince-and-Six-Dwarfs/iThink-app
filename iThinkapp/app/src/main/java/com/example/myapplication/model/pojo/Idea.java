@@ -2,9 +2,10 @@ package com.example.myapplication.model.pojo;
 
 import org.litepal.crud.DataSupport;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Idea extends DataSupport {
+public class Idea extends DataSupport implements Serializable {
     //胶囊ID、拥有者ID、胶囊名称（标题）、胶囊内容、胶囊生成时间
     private int ideaId;
     private int ownerId;
