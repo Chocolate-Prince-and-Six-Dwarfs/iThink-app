@@ -53,19 +53,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         String password=sharedPreferences.getString("password","");
         boolean checkbox=sharedPreferences.getBoolean("checkbox",false);
 
-        String userId = sharedPreferences.getString("userId","");
+        flag = false;
+
+        userId = sharedPreferences.getString("userId","");
+        Log.d("测试中：","什么玩意？？？"+userId);
         if(!userId.isEmpty()){
             Intent intent = new Intent(MainActivity.this, IdeasActivity.class);
             intent.putExtra("user_id",userId);
             startActivity(intent);
-            MainActivity.this.finish();
+            finish();
         }
 
         editText1.setText(username);
         editText2.setText(password);
         checkBox.setChecked(checkbox);
-
-        flag = false;
 
     }
 
@@ -76,7 +77,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.btn_login:
 
                 HttpRequest();
-
                 break;
             //直接进入按钮
             case R.id.btn_enter:
@@ -105,8 +105,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             ProgressDialog progressDialog = new ProgressDialog(MainActivity.this);
             progressDialog.setMessage("Login...");
-            progressDialog.setCancelable(false);
-            progressDialog.show();
+            if (!MainActivity.this.isFinishing())
+            {
+                progressDialog.show();
+            }
+
 
             RequestBody requestBody = new FormBody.Builder()
                     .add("email", username)
@@ -137,13 +140,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         if(checkBox.isChecked()){
                             SharedPreferences sharedPreferences = getSharedPreferences("config",0);
                             SharedPreferences.Editor editor=sharedPreferences.edit();
+
+
                             //把数据进行保存
                             editor.putString("name",username);
                             editor.putString("password",password);
                             //记住勾选的状态
                             editor.putBoolean("checkbox",checkBox.isChecked());
-                            //提交数据
-                            editor.commit();
 
                             //保存用户cookie
                             editor.putString("userId",userId);
@@ -151,18 +154,37 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             //提交数据
                             editor.commit();
 
-                        }
-                        while(false == flag){}
+                        }else{
+                            SharedPreferences sharedPreferences = getSharedPreferences("config",0);
+                            SharedPreferences.Editor editor=sharedPreferences.edit();
 
-                        progressDialog.dismiss();
+                            //把数据进行保存
+                            editor.remove("checkbox");
+                            editor.remove("password");
+                            editor.remove("userId");
+                            editor.putString("name",username);
+
+                            //提交数据
+                            editor.commit();
+                        }
+                        if (!MainActivity.this.isFinishing())
+                        {
+                            while(false == flag){}
+                            progressDialog.dismiss();
+                        }
                         Intent intent = new Intent(MainActivity.this, IdeasActivity.class);
+
                         intent.putExtra("user_id",userId);
                         startActivity(intent);
-                        MainActivity.this.finish();
+
+                        finish();
 
                     }else{
 
-                        progressDialog.dismiss();
+                        if (!MainActivity.this.isFinishing())
+                        {
+                            progressDialog.dismiss();
+                        }
                         Looper.prepare();
                         Toast.makeText(getBaseContext(), "账号或密码错误", Toast.LENGTH_LONG).show();
                         Looper.loop();

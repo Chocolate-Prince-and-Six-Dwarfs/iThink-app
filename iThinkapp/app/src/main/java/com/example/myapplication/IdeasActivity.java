@@ -119,6 +119,7 @@ public class IdeasActivity extends AppCompatActivity implements View.OnClickList
                         editor.commit();
                         Intent intent = new Intent(IdeasActivity.this,MainActivity.class);
                         startActivity(intent);
+                        finish();
                         break;
                     case R.id.exit:
                         ActivityCollector.finishAll();

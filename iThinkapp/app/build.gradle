@@ -32,7 +32,7 @@ android {
         variant ->
             variant.outputs.all {
                 //在这里修改apk文件名
-                outputFileName = "iThink-v1.1.apk"
+                outputFileName = "iThink-v1.3.apk"
             }
     }
 }
