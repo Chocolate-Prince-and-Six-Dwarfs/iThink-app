@@ -52,7 +52,6 @@ public class CreateIdeaActivity extends AppCompatActivity implements View.OnClic
 
         //判断 离线/在线
         if(user_id.isEmpty()){
-            //x`initUser();
         }else{
             getUserInfo(user_id);
             while(false == flag){}
@@ -73,7 +72,7 @@ public class CreateIdeaActivity extends AppCompatActivity implements View.OnClic
                     idea.setOwnerName("游客");
                 }
                 else{
-                    idea.setOwnerId(Integer.parseInt(user_id));
+                    idea.setOwnerId(user.getId());
                     idea.setOwnerName(user.getName());
                 }
                 idea.setTitle(editTitle.getText().toString());
@@ -87,11 +86,11 @@ public class CreateIdeaActivity extends AppCompatActivity implements View.OnClic
                 String    format = "yyyy-MM-dd HH:mm:ss";
                 SimpleDateFormat formatter = new SimpleDateFormat(format);
 
-                Log.d("third:",Integer.toString(idea.getIdeaId())+"  "+Integer.toString(idea.getOwnerId())+"  "+formatter.format(date));
                 Intent intent = new Intent(CreateIdeaActivity.this, IdeasActivity.class);
                 intent.putExtra("user_id",user_id);
                 startActivity(intent);
-                CreateIdeaActivity.this.finish();
+
+                finish();
 
                 break;
                 default:

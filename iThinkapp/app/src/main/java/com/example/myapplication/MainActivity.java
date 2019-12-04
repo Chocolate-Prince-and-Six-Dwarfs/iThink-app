@@ -28,6 +28,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private EditText editText2;
     private CheckBox checkBox;
 
+    private String userId;
+    private boolean flag;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,6 +64,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         editText1.setText(username);
         editText2.setText(password);
         checkBox.setChecked(checkbox);
+
+        flag = false;
 
     }
 
@@ -114,6 +119,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     String responseData = response.body().string();
                     //解析返回结果，进行判断是否是正确账号密码
                     if(1 == ApiHelper.flagJSONWithGSON(responseData)){
+
+                        String cookie = response.header("Set-Cookie");
+
+                        ApiHelper.sendcookieRequest("http://47.97.187.33:8080/user/getLoginId",cookie,new okhttp3.Callback(){
+                            @Override
+                            public void onFailure(Call call, IOException e) {
+                            }
+                            @Override
+                            public void onResponse(Call call, Response response) throws IOException {
+                                userId = response.body().string();
+                                flag = true;
+                            }
+                        });
+
                         //检查是否需要记住密码
                         if(checkBox.isChecked()){
                             SharedPreferences sharedPreferences = getSharedPreferences("config",0);
@@ -126,37 +145,20 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             //提交数据
                             editor.commit();
 
-                            String cookie = response.header("Set-Cookie");
+                            //保存用户cookie
+                            editor.putString("userId",userId);
 
-                            ApiHelper.sendcookieRequest("http://47.97.187.33:8080/user/getLoginId",cookie,new okhttp3.Callback(){
-                                @Override
-                                public void onFailure(Call call, IOException e) {
-                                }
-
-                                @Override
-                                public void onResponse(Call call, Response response) throws IOException {
-                                    String userId = response.body().string();
-
-                                    //保存用户cookie
-                                    SharedPreferences sharedPreferences = getSharedPreferences("config",0);
-                                    SharedPreferences.Editor editor=sharedPreferences.edit();
-                                    //把数据进行保存
-                                    editor.putString("userId",userId);
-
-                                    //提交数据
-                                    editor.commit();
-
-                                    progressDialog.dismiss();
-
-                                    Intent intent = new Intent(MainActivity.this, IdeasActivity.class);
-                                    intent.putExtra("user_id",userId);
-                                    startActivity(intent);
-                                    MainActivity.this.finish();
-                                }
-                            });
+                            //提交数据
+                            editor.commit();
 
                         }
+                        while(false == flag){}
 
+                        progressDialog.dismiss();
+                        Intent intent = new Intent(MainActivity.this, IdeasActivity.class);
+                        intent.putExtra("user_id",userId);
+                        startActivity(intent);
+                        MainActivity.this.finish();
 
                     }else{
 
