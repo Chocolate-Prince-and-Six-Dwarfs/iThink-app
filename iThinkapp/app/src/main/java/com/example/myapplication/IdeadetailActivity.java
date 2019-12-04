@@ -1,12 +1,10 @@
 package com.example.myapplication;
 
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.EditText;
 import android.widget.TextView;
-
 import java.util.ArrayList;
 
 public class IdeadetailActivity extends AppCompatActivity {
@@ -32,6 +30,7 @@ public class IdeadetailActivity extends AppCompatActivity {
         content.setText(intent.getStringExtra("content"));
         date.setText(intent.getStringExtra("date"));
         owner.setText(intent.getStringExtra("user_name"));
-        //date.setText(intent.getStringExtra("date"));
+
+
     }
 }

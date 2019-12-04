@@ -76,7 +76,7 @@ public class CreateIdeaActivity extends AppCompatActivity implements View.OnClic
                 idea.setDate(date);
                 idea.setIs_upload(false);
                 idea.save();
-                Log.d("third:","1111111111111111111111111111111");
+
                 Intent intent = new Intent(CreateIdeaActivity.this, IdeasActivity.class);
                 intent.putExtra("user_id",user_id);
                 startActivity(intent);
