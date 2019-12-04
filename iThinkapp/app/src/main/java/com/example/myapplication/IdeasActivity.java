@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -60,6 +61,8 @@ public class IdeasActivity extends AppCompatActivity implements View.OnClickList
         ListView listView = (ListView)findViewById(R.id.list_view);
         listView.setAdapter(adapter);
 
+        handler.postDelayed(task, 1000);
+
         //左上角登录按钮
         Button back_login = (Button)findViewById(R.id.button_back_login);
         back_login.setOnClickListener(this);
@@ -92,7 +95,9 @@ public class IdeasActivity extends AppCompatActivity implements View.OnClickList
                         Intent intent1 = new Intent(IdeasActivity.this,IdeadetailActivity.class);
                         intent1.putExtra("title",idea.getTitle());
                         intent1.putExtra("content",idea.getContent());
-
+                        intent1.putExtra("idea_id",String.valueOf(idea.getIdeaId()));
+                        intent1.putExtra("user_id",String.valueOf(user.getId()));
+                        Log.d("测试删除：",String.valueOf(idea.getIdeaId()));
                         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                         intent1.putExtra("date",sdf.format(idea.getDate()));
 
@@ -174,4 +179,21 @@ public class IdeasActivity extends AppCompatActivity implements View.OnClickList
             }
         });
     }
+
+    private final Handler handler = new Handler();
+    private final Runnable task = new Runnable() {
+        @Override
+        public void run() {
+            // TODO Auto-generated method stub
+            if (true) {
+                ideaList = DataSupport.findAll(Idea.class);
+
+                IdeaAdapter adapter = new IdeaAdapter(IdeasActivity.this,R.layout.item_simple_idea, ideaList);
+
+                ListView listView = (ListView)findViewById(R.id.list_view);
+                listView.setAdapter(adapter);
+                handler.postDelayed(this, 1000);
+            }
+        }
+    };
 }

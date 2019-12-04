@@ -1,4 +1,4 @@
-﻿package com.example.myapplication;
+package com.example.myapplication;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -12,6 +12,8 @@ import android.widget.EditText;
 import com.example.myapplication.model.http.ApiHelper;
 import com.example.myapplication.model.pojo.Idea;
 import com.example.myapplication.model.pojo.User;
+
+import org.litepal.crud.DataSupport;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -62,7 +64,8 @@ public class CreateIdeaActivity extends AppCompatActivity implements View.OnClic
         switch (view.getId()){
             case R.id.idea_create:
                 Date date = new Date();
-                idea.setIdeaId(0);
+                int num = DataSupport.count(Idea.class);
+                idea.setIdeaId(num+1);
                 //离线添加胶囊，设置创建者ID为0，名称为游客
                 if(user_id.isEmpty())
                 {

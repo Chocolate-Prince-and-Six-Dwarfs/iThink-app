@@ -6,12 +6,6 @@
     <item
         android:id="@+id/exit"
         android:title="退出"/>
-    <item
-        android:id="@+id/test1"
-        android:title="测试添加"/>
-    <item
-        android:id="@+id/test2"
-        android:title="测试删除"/>
 
     <item
         android:id="@+id/create_idea"
