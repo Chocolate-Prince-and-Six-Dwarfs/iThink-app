@@ -95,6 +95,7 @@ public class IdeasActivity extends AppCompatActivity implements View.OnClickList
 
                         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                         intent1.putExtra("date",sdf.format(idea.getDate()));
+
                         intent1.putExtra("user_name",user.getName());
                         startActivity(intent1);
 

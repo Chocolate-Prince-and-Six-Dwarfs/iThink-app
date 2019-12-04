@@ -32,6 +32,5 @@ public class IdeadetailActivity extends AppCompatActivity {
         content.setText(intent.getStringExtra("content"));
         date.setText(intent.getStringExtra("date"));
         owner.setText(intent.getStringExtra("user_name"));
-        //date.setText(intent.getStringExtra("date"));
     }
 }
