@@ -32,5 +32,6 @@ public class IdeadetailActivity extends AppCompatActivity {
         owner.setText(intent.getStringExtra("user_name"));
 
 
+
     }
 }
