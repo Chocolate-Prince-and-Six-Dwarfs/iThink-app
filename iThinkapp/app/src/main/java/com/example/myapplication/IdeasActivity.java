@@ -44,10 +44,9 @@ public class IdeasActivity extends AppCompatActivity implements View.OnClickList
     /*private List<Idea> ideaList = new ArrayList<>();*/
     private List<Idea> ideaList = DataSupport.findAll(Idea.class);
     private String user_id;
-
     private User user;
-
     boolean flag;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -167,6 +166,7 @@ public class IdeasActivity extends AppCompatActivity implements View.OnClickList
                         break;
                     case R.id.create_idea:
                         Intent intent1 = new Intent(IdeasActivity.this, CreateIdeaActivity.class);
+                        intent1.putExtra("user_id",user_id);
                         startActivity(intent1);
                         break;
                     default:
