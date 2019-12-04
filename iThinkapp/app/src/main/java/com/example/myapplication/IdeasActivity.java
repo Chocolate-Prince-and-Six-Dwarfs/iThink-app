@@ -98,7 +98,6 @@ public class IdeasActivity extends AppCompatActivity implements View.OnClickList
 
                         intent1.putExtra("user_name",user.getName());
                         startActivity(intent1);
-
             }
         });
 
@@ -140,31 +139,6 @@ public class IdeasActivity extends AppCompatActivity implements View.OnClickList
                         break;
                     case R.id.exit:
                         ActivityCollector.finishAll();
-                        break;
-                    case R.id.test1:
-                        Idea idea1 = new Idea();
-                        Date date = new Date();
-
-                        String owner;
-                        if(!user_id.isEmpty()){
-                            owner = user.getName();
-                        }else{
-                            owner = "游客";
-                        }
-
-                        idea1.setIdeaId(1);
-                        idea1.setOwnerId(Integer.parseInt(user_id));
-                        idea1.setTitle("第一个");
-                        idea1.setOwnerName(owner);
-                        idea1.setContent("内容呀呀呀呀呀呀呀呀!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-                        idea1.setDate(date);
-                        Log.d("Second",date.toString());
-                        idea1.setIs_upload(false);
-
-                        idea1.save();
-                        break;
-                    case R.id.test2:
-                        DataSupport.deleteAll(Idea.class,"ideaId = ?","1");
                         break;
                     case R.id.create_idea:
                         Intent intent1 = new Intent(IdeasActivity.this, CreateIdeaActivity.class);
