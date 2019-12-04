@@ -42,7 +42,7 @@ import okhttp3.Response;
 public class IdeasActivity extends AppCompatActivity implements View.OnClickListener{
 
     /*private List<Idea> ideaList = new ArrayList<>();*/
-    private List<Idea> ideaList = DataSupport.findAll(Idea.class);
+    private List<Idea> ideaList;
     private String user_id;
     private User user;
     boolean flag;
@@ -53,6 +53,7 @@ public class IdeasActivity extends AppCompatActivity implements View.OnClickList
         setContentView(R.layout.activity_ideas);
 
         ActivityCollector.addActivity(this);
+        ideaList = DataSupport.findAll(Idea.class);
 
         IdeaAdapter adapter = new IdeaAdapter(IdeasActivity.this,R.layout.item_simple_idea, ideaList);
 

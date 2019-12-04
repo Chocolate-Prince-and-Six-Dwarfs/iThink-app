@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -36,9 +37,13 @@ public class CreateIdeaActivity extends AppCompatActivity implements View.OnClic
         setContentView(R.layout.activity_create);
         ActivityCollector.addActivity(this);
 
-        Button button = (Button)findViewById(R.id.create_idea);
+        Button button = (Button)findViewById(R.id.idea_create);
+        button.setOnClickListener(this);
         editTitle =  (EditText)findViewById(R.id.create_title);
         editContent = (EditText)findViewById(R.id.create_content);
+
+        idea = new Idea();
+
         //接收传过来的用户名
         Intent intent = getIntent();
         user_id = intent.getStringExtra("user_id");
@@ -47,14 +52,15 @@ public class CreateIdeaActivity extends AppCompatActivity implements View.OnClic
             initUser();
         }else{
             getUserInfo(user_id);
+            while(false == flag){}
         }
     }
 
     @Override
     public void onClick(View view) {
         switch (view.getId()){
-            case R.id.create_idea:
-                    Date date = new Date();
+            case R.id.idea_create:
+                Date date = new Date();
                 idea.setIdeaId(0);
                 if(user_id.isEmpty())
                 {
@@ -65,11 +71,17 @@ public class CreateIdeaActivity extends AppCompatActivity implements View.OnClic
                     idea.setOwnerId(Integer.parseInt(user_id));
                     idea.setOwnerName(user.getName());
                 }
-                idea.setTitle(editTitle.toString());
-                idea.setContent(editContent.toString());
+                idea.setTitle(editTitle.getText().toString());
+                idea.setContent(editContent.getText().toString());
                 idea.setDate(date);
                 idea.setIs_upload(false);
                 idea.save();
+                Log.d("third:","1111111111111111111111111111111");
+                Intent intent = new Intent(CreateIdeaActivity.this, IdeasActivity.class);
+                intent.putExtra("user_id",user_id);
+                startActivity(intent);
+                CreateIdeaActivity.this.finish();
+
                 break;
                 default:
                     break;
