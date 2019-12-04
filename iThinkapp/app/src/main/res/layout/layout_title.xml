@@ -3,7 +3,7 @@
     android:id="@+id/layout_title"
     android:layout_width="match_parent"
     android:layout_height="60dp"
-    android:background="@color/titleColor">
+    android:background="@color/userColor">
 
     <TextView
         android:id="@+id/title"
@@ -22,7 +22,7 @@
         android:layout_height="match_parent"
         android:drawableLeft="@drawable/backward"
         android:drawablePadding="6dp"
-        android:background="@color/titleColor"
+        android:background="@color/userColor"
         android:ellipsize="end"
         android:gravity="center"
         android:onClick="onClick"
@@ -33,5 +33,20 @@
         android:textSize="18dp"
         android:visibility="visible" />
 
+    <Button
+        android:id="@+id/button_idea"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:drawablePadding="6dp"
+        android:background="@color/userColor"
+        android:ellipsize="end"
+        android:gravity="center"
+        android:onClick="onClick"
+        android:layout_alignParentRight="true"
+        android:singleLine="true"
+        android:textColor="#ffffffff"
+        android:textSize="18dp"
+        android:visibility="visible"
+        android:text="管理"/>
 
 </RelativeLayout>
